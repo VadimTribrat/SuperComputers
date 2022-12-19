@@ -10,6 +10,7 @@ const double A = 4, B = 3;
 double * x, *y;
 int ax1[2] = {0, 0}, ax2[2] = {0, 0};
 double *right_r = NULL, *left_r = NULL, *top_r = NULL, *bottom_r = NULL;
+omp_set_num_threads(4);
 
 
 double k(double, double);
