@@ -140,22 +140,22 @@ int main(int argc, char * * argv)
         if (top_scr != MPI_PROC_NULL)
         {
             for (int i = 0; i < ax1[1] - ax1[0]; ++i)
-                w[i][ax2[1] - 1] = top_r[i];
+                w[ax1[0] + i][ax2[1]] = top_r[i];
         }
         if (bttm_dest != MPI_PROC_NULL)
         {
             for (int i = 0; i < ax1[1] - ax1[0]; ++i)
-                w[i][ax2[0]] = bottom_r[i];
+                w[ax1[0] + i][ax2[0] - 1] = bottom_r[i];
         }
         if (left_scr != MPI_PROC_NULL)
         {
             for (int i = 0; i < ax2[1] - ax2[0]; ++i)
-                w[ax1[0]][i] = left_r[i];
+                w[ax1[0] - 1][ax2[0] + i] = left_r[i];
         }
         if (right_dest != MPI_PROC_NULL)
         {
             for (int i = 0; i < ax2[1] - ax2[0]; ++i)
-                w[ax1[1] - 1][i] = right_r[i];
+                w[ax1[1]][ax2[0] + i] = right_r[i];
         }  
 
         res = operator_A(w);
@@ -217,7 +217,7 @@ int main(int argc, char * * argv)
             // print_mat(residual);
 
             Ar = operator_A1(residual);
-            //printf("%f\n", sqrt(scalar_product(residual, residual)));
+            printf("%f\n", sqrt(scalar_product(residual, residual)));
             double coef = scalar_product(Ar, residual) / scalar_product(Ar, Ar);
 
             mul(residual, -coef);
